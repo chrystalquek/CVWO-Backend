@@ -2,17 +2,15 @@ class UsersController < ApplicationController
   # before_action :set_user, only: [:show, :update, :destroy]
 
     def create
-      user = User.create(user_params)
-      if user.valid?
+      user = User.new(user_params)
+      if user.save
           payload = {user_id: user.id}
           token = encode_token(payload)
           render json: {user: user, jwt: token}
       else
-          render json: {errors: user.errors.full_messages}, status: :not_acceptable
+          render json: {errors: user.errors.full_messages}
       end
     end
-
-
 
 
   # GET /users
@@ -44,12 +42,7 @@ class UsersController < ApplicationController
   # end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    # def set_user
-    #   @user = User.find(params[:id])
-    # end
-
-    # Only allow a trusted parameter "white list" through.
+   
     def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation)
     end

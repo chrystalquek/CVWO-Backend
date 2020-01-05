@@ -10,11 +10,11 @@ class AuthController < ApplicationController
     end
     
     def login
-        user = User.find_by(email: auth_params[:email])
+        user = User.find_by(username: auth_params[:username])
         if user && user.authenticate(auth_params[:password])
             payload = {user_id: user.id}
             token = encode_token(payload)
-            render json: {user: user, jwt: token, success: "Welcome back, #{user.username}"}
+            render json: {jwt: token, userid: user.id}
         else
             render json: {failure: "login failed"}
         end
