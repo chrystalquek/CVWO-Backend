@@ -1,6 +1,7 @@
 # class TodosController < ApplicationController
 class TodosController < AuthController
   before_action :require_login
+  
 
   def create
     @todo = Todo.new(todo_params)
@@ -38,11 +39,18 @@ end
 
 def update
     todo = Todo.find(params[:id])
-    todo.update_attributes(todo_params)
+    if todo.update_attributes(todo_params)
     render json: {
         status: 200,
         todo: todo
-    }
+    } 
+  
+    else 
+      render json: {
+        status: 500,
+        errors: todo.errors.full_messages
+      }
+    end
 end
 
   private
