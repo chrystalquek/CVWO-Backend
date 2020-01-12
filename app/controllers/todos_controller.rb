@@ -9,7 +9,7 @@ class TodosController < AuthController
     if @todo.save
       render json: {
         status: :created,
-        todos: @todo.user
+        todoid: @todo.id
       }
     else 
       render json: {
