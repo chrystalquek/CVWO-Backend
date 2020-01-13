@@ -19,6 +19,8 @@ gem 'knock'
 gem 'bcrypt'
 gem 'jwt'
 gem 'rack-cors'
+gem 'rails_12factor'
+gem 'foreman'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
