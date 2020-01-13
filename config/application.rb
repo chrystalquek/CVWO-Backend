@@ -28,8 +28,8 @@ module RailsReactTokenAuth
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins '*'
-        resource '*', headers: :any, methods: [:get, :post, :delete, :put, :options]
+        origins 'https://sharp-roentgen-6f32fa.netlify.com/'
+        resource '*', headers: :any, methods: [:get, :post, :delete, :put, :options, :head]
       end
     end
 
