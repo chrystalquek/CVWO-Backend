@@ -38,8 +38,9 @@ def index
 end
 
 def show
+  todo = Todo.find(params[:id])
      render json: {
-      todo: @todo
+      todo: todo
     }
  end
 
