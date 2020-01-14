@@ -37,6 +37,12 @@ def index
 
 end
 
+def show
+     render json: {
+      todo: @todo
+    }
+ end
+
 def update
     todo = Todo.find(params[:id])
     if todo.update_attributes(todo_params)
