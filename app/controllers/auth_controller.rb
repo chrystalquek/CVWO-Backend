@@ -5,17 +5,12 @@ class AuthController < ApplicationController
         !!session_user
     end
 
-    def is_admin?
-        !!admin_user
-    end
-
+    
     def require_login
         render json: {message: 'Pleae login'}, status: :unauthorized unless logged_in?
     end
 
-    def require_admin
-        render json: {message: 'Access denied, not admin'}, status: :unauthorized unless is_admin?
-    end
+    
     
     def login
         user = User.find_by(username: auth_params[:username])

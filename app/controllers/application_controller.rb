@@ -13,6 +13,15 @@ class ApplicationController < ActionController::API
         end
     end
 
+    def require_admin
+        render json: {message: 'Access denied, not admin'}, status: :unauthorized unless is_admin?
+    end
+
+    def is_admin?
+        !!admin_user
+    end
+
+
     def admin_user
         decoded_hash = decoded_token
         if decoded_hash && !decoded_hash.empty?
