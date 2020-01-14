@@ -1,5 +1,6 @@
-class UsersController < ApplicationController
+class UsersController < AuthController
   # before_action :set_user, only: [:show, :update, :destroy]
+  before_action :require_admin, except: :create
 
     def create
       user = User.new(user_params)
@@ -17,7 +18,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
-    render json: @users
+    render json: {users: @users}
   end
 
   # # GET /users/1
@@ -44,6 +45,6 @@ class UsersController < ApplicationController
   private
    
     def user_params
-      params.require(:user).permit(:username, :email, :password, :password_confirmation)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :admin)
     end
 end

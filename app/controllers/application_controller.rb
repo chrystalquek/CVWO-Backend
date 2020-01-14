@@ -13,6 +13,17 @@ class ApplicationController < ActionController::API
         end
     end
 
+    def admin_user
+        decoded_hash = decoded_token
+        if decoded_hash && !decoded_hash.empty?
+            user_id = decoded_hash[0]['user_id']
+            @is_admin = User.find_by(id: user_id).admin
+            
+        else
+            nil
+        end
+    end
+
     def auth_header
         request.headers['Authorization']
     end

@@ -5,8 +5,16 @@ class AuthController < ApplicationController
         !!session_user
     end
 
+    def is_admin?
+        !!admin_user
+    end
+
     def require_login
         render json: {message: 'Pleae login'}, status: :unauthorized unless logged_in?
+    end
+
+    def require_admin
+        render json: {message: 'Access denied, not admin'}, status: :unauthorized unless is_admin?
     end
     
     def login
@@ -14,7 +22,7 @@ class AuthController < ApplicationController
         if user && user.authenticate(auth_params[:password])
             payload = {user_id: user.id}
             token = encode_token(payload)
-            render json: {jwt: token, userid: user.id}
+            render json: {jwt: token, userid: user.id, admin: user.admin}
         else
             render json: {failure: "login failed"}
         end
