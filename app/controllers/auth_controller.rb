@@ -34,7 +34,7 @@ class AuthController < ApplicationController
 
     private
     def auth_params
-        params.require(:user).permit(:username, :email, :password)
+        params.require(:user).permit(:username, :email, :password, :admin)
     end
 
 end
