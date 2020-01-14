@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 2020_01_14_153737) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "admin"
     t.index ["user_id"], name: "index_todos_on_user_id"
   end
 
@@ -34,6 +33,7 @@ ActiveRecord::Schema.define(version: 2020_01_14_153737) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin"
   end
 
   add_foreign_key "todos", "users"
