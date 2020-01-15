@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     user = User.find(params[:id])
-    if user.update_attributes(user_params)
+    if user.update_attributes(user_update_params)
     render json: {
         status: 200,
         user: user
@@ -57,4 +57,9 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation, :admin)
     end
+
+    def user_update_params
+      params.require(:user).permit(:username, :email, :admin)
+    end
+
 end
