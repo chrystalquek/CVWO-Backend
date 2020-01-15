@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_14_153737) do
+ActiveRecord::Schema.define(version: 2020_01_15_090327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,5 +36,5 @@ ActiveRecord::Schema.define(version: 2020_01_14_153737) do
     t.boolean "admin"
   end
 
-  add_foreign_key "todos", "users"
+  add_foreign_key "todos", "users", on_delete: :cascade
 end
