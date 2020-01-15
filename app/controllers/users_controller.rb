@@ -30,16 +30,25 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
-      render json: @user
-    else
-      render json: @user.errors, status: :unprocessable_entity
+    user = User.find(params[:id])
+    if user.update_attributes(user_params)
+    render json: {
+        status: 200,
+        user: user
+    } 
+  
+    else 
+      render json: {
+        status: 500,
+        errors: user.errors.full_messages
+      }
     end
   end
 
   # DELETE /users/1
   def destroy
-    @user.destroy
+    user = User.find(params[:id])
+    user.destroy
   end
 
   private
