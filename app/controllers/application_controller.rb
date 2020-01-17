@@ -23,7 +23,7 @@ class ApplicationController < ActionController::API
         decoded_hash = decoded_token
         if decoded_hash && !decoded_hash.empty?
             user_id = decoded_hash[0]['user_id']
-            @is_admin = User.find_by(id: user_id).admin || @user.id === user_id
+            @is_admin = User.find_by(id: user_id).admin 
             
         else
             nil
