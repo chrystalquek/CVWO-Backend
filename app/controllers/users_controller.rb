@@ -13,10 +13,7 @@ class UsersController < ApplicationController
       end
     end
 
-    def require_admin
-      @user = User.find(params[:id])
-      render json: {message: 'Access denied, not admin'}, status: :unauthorized unless is_admin?
-    end
+   
 
 
   # GET /users
