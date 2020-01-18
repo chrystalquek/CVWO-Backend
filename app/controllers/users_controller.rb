@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < AuthController
   # before_action :set_user, only: [:show, :update, :destroy]
   before_action :require_login, except: :create
 
