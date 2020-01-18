@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   # before_action :set_user, only: [:show, :update, :destroy]
-  before_action :require_admin, except: :create
+  before_action :require_login, except: :create
 
     def create
       user = User.new(user_params)
