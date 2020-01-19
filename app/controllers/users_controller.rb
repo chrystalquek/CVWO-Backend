@@ -7,7 +7,7 @@ class UsersController < AuthController
       if user.save
           payload = {user_id: user.id}
           token = encode_token(payload)
-          render json: {user: user, jwt: token}
+          render json: {user: user, jwt: token, userid: user.id, admin: user.admin}
       else
           render json: {errors: user.errors.full_messages}
       end
