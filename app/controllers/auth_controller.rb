@@ -1,17 +1,17 @@
 class AuthController < ApplicationController
     before_action :require_login, except: :login
 
+    # returns boolean
     def logged_in?
         !!session_user
     end
-
     
+    # catches unauthorized api calls
     def require_login
         render json: {message: 'Pleae login'}, status: :unauthorized unless logged_in?
     end
 
-    
-    
+    # gives user token upon logging in, subsequently stored in localStorage
     def login
         user = User.find_by(username: auth_params[:username])
         if user && user.authenticate(auth_params[:password])

@@ -1,12 +1,9 @@
 class Todo < ApplicationRecord
+  # user has many todos relationship
   belongs_to :user
 
+  # ensures that title and tag are present, otherwise frontend will display corresponding error
   validates :title, presence: true
   validates :tag, presence: true
-  
-  # validates_format_of :duedate, :with =>  ^\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}
 
-  # ^(\d{1,2}\/){2}\d{4}\s+((\d+)(\:)){2}\d+\s+(AM|PM)
-  
-   
 end

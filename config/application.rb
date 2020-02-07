@@ -25,7 +25,7 @@ module RailsReactTokenAuth
     config.load_defaults 6.0
 
   
-
+    # handle rack-cors
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins 'https://sharp-roentgen-6f32fa.netlify.com', 'https://to-do-helper.herokuapp.com', 'http://localhost:3000'

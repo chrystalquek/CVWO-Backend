@@ -1,25 +1,22 @@
 class UsersController < AuthController
-  # before_action :set_user, only: [:show, :update, :destroy]
+  # ensure that for any action on user, user is logged in
+  # a user can only edit his own details but an admin can edit all users details
   before_action :require_login, except: :create
 
-    def create
-      user = User.new(user_params)
-      if user.save
-          payload = {user_id: user.id}
-          token = encode_token(payload)
-          render json: {user: user, jwt: token, userid: user.id, admin: user.admin}
-      else
-          render json: {errors: user.errors.full_messages}
-      end
+  def create
+    user = User.new(user_params)
+    if user.save
+        payload = {user_id: user.id}
+        token = encode_token(payload)
+        render json: {user: user, jwt: token, userid: user.id, admin: user.admin}
+    else
+        render json: {errors: user.errors.full_messages}
     end
-
-   
-
+  end
 
   # GET /users
   def index
     @users = User.all
-
     render json: {users: @users}
   end
 
@@ -28,7 +25,6 @@ class UsersController < AuthController
     @user = User.find(params[:id])
     render json: {user: @user}
   end
-
 
 
   # PATCH/PUT /users/1

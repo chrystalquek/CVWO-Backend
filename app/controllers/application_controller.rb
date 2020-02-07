@@ -1,8 +1,11 @@
 class ApplicationController < ActionController::API
+
+    # method to encode user details using JWT
     def encode_token(payload)
         JWT.encode(payload, 'my_secret')
     end
 
+    # check if user is valid by checking user_id with database
     def session_user
         decoded_hash = decoded_token
         if decoded_hash && !decoded_hash.empty?
@@ -22,13 +25,11 @@ class ApplicationController < ActionController::API
         !!admin_user
     end
 
-
     def admin_user
         decoded_hash = decoded_token
         if decoded_hash && !decoded_hash.empty?
             user_id = decoded_hash[0]['user_id']
             @is_admin = User.find_by(id: user_id).admin 
-            
         else
             nil
         end
@@ -48,5 +49,5 @@ class ApplicationController < ActionController::API
             end
         end
     end
-    # include Knock::Authenticable
+  
 end
